@@ -1,0 +1,33 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1" author="artem">
+        <createTable tableName="online_user_authority">
+            <column name="user_id"
+                    type="VARCHAR(100)" />
+            <column name="authority_id"
+                    type="VARCHAR(100)" />
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="artem">
+        <addPrimaryKey tableName="online_user_authority"
+                       columnNames="user_id, authority_id" />
+        <addForeignKeyConstraint baseTableName="online_user_authority"
+                                 baseColumnNames="user_id"
+                                 constraintName="online_user_authority_user_id_FK"
+                                 referencedTableName="online_user"
+                                 referencedColumnNames="id" />
+        <addForeignKeyConstraint baseTableName="online_user_authority"
+                                 baseColumnNames="authority_id"
+                                 constraintName="online_user_authority_authority_id_FK"
+                                 referencedTableName="user_authority"
+                                 referencedColumnNames="id" />
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,43 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1" author="artem">
+        <createTable tableName="oauth_access_token">
+            <column name="token_id" type="VARCHAR(256)">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="token"
+                    type="BLOB" />
+            <column name="authentication_id"
+                    type="VARCHAR(256)" />
+            <column name="user_name"
+                    type="VARCHAR(256)" />
+            <column name="client_id"
+                    type="VARCHAR(256)" />
+            <column name="authentication"
+                    type="BLOB" />
+            <column name="refresh_token"
+                    type="VARCHAR(256)" />
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="artem">
+        <addForeignKeyConstraint baseTableName="oauth_access_token"
+                                 baseColumnNames="user_name"
+                                 constraintName="oauth_access_token_user_name_FK"
+                                 referencedTableName="online_user"
+                                 referencedColumnNames="phone" />
+    </changeSet>
+
+    <changeSet id="3" author="artem">
+        <addForeignKeyConstraint baseTableName="oauth_access_token"
+                                 baseColumnNames="client_id"
+                                 constraintName="oauth_access_token_client_id_FK"
+                                 referencedTableName="oauth_client_details"
+                                 referencedColumnNames="client_id" />
+    </changeSet>
+
+</databaseChangeLog>

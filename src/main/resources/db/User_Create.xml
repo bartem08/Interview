@@ -1,0 +1,36 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1" author="artem">
+        <createTable tableName="online_user">
+            <column name="id"
+                    type="VARCHAR(100)">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="email"
+                    type="VARCHAR(100)" />
+            <column name="password"
+                    type="VARCHAR(100)" />
+            <column name="phone"
+                    type="VARCHAR(10)" />
+            <column name="first_name"
+                    type="VARCHAR(100)" />
+            <column name="last_name"
+                    type="VARCHAR(100)" />
+            <column name="enabled"
+                    type="TINYINT"
+                    defaultValue="0" />
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="artem">
+        <addUniqueConstraint tableName="online_user" columnNames="phone" />
+        <addUniqueConstraint tableName="online_user" columnNames="email" />
+    </changeSet>
+
+</databaseChangeLog>
