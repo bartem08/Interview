@@ -12,8 +12,12 @@ public class UserTest {
 
     private Validator validator;
 
+    public static final String EMAIL_MESSAGE = "not a well-formed email address";
+
+    public static final String PHONE_MESSAGE = "must match \"^[0][1-9][0-9]{8}\"";
+
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
@@ -54,7 +58,7 @@ public class UserTest {
         user.setEmail("incorrect");
 
         assertTrue(validator.validate(user).stream().anyMatch(constraintViolation ->
-                constraintViolation.getMessage().equals("not a well-formed email address")));
+                EMAIL_MESSAGE.equals(constraintViolation.getMessage())));
     }
 
     @Test
@@ -62,7 +66,7 @@ public class UserTest {
         user.setPhone("1234567890");
 
         assertTrue(validator.validate(user).stream().anyMatch(constraintViolation ->
-                constraintViolation.getMessage().equals("must match \"^[0][1-9][0-9]{8}\"")));
+                PHONE_MESSAGE.equals(constraintViolation.getMessage())));
     }
 
     @Test

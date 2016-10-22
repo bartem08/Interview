@@ -1,5 +1,6 @@
 package com.interview.model.entity;
 
+import com.interview.model.ITitle;
 import lombok.*;
 import com.interview.model.AbstractModel;
 import com.interview.model.InterviewUserDetails;
@@ -14,7 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Table(name = "online_user")
 @EqualsAndHashCode(callSuper = false, of = "phone")
-public class User extends AbstractModel implements InterviewUserDetails {
+public class User extends AbstractModel implements InterviewUserDetails, ITitle {
 
     private static final long serialVersionUID = 7672079542738527281L;
 
@@ -39,4 +40,10 @@ public class User extends AbstractModel implements InterviewUserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id"))
     private Set<Role> authorities;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "online_user_direction",
+            joinColumns = @JoinColumn(name = "online_user_id"),
+            inverseJoinColumns = @JoinColumn(name = "direction_id"))
+    private Set<Direction> directions;
 }

@@ -12,5 +12,9 @@
     <include file="db/OAuthAccessToken_Create.xml" />
     <include file="db/Oauth_Client_Details_Insert1.xml" />
     <include file="db/Online_User_Authority_Create.xml" />
+    <include file="db/Direction_Create.xml" />
+    <include file="db/Candidate_Create.xml" />
+    <include file="db/Candidate_Direction_Create.xml" />
+    <include file="db/User_Direction_Create.xml" />
 
 </databaseChangeLog>
