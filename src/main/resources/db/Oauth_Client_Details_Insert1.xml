@@ -1,0 +1,19 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1" author="artem">
+        <insert tableName="oauth_client_details">
+            <column name="client_id" value="mobile" />
+            <column name="client_secret" value="secret" />
+            <column name="scope" value="trust" />
+            <column name="authorized_grant_types" value="password" />
+            <column name="authorities" value="OAUTH_ROLE_MOBILE" />
+            <column name="access_token_validity" value="10000" />
+            <column name="autoapprove" value="true" />
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

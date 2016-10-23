@@ -1,0 +1,35 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1" author="artem">
+        <createTable tableName="candidate_direction">
+            <column name="candidate_id"
+                    type="VARCHAR(100)">
+            </column>
+            <column name="direction_id"
+                    type="VARCHAR(100)" />
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="artem">
+        <addPrimaryKey tableName="candidate_direction"
+                       columnNames="candidate_id, direction_id" />
+        <addForeignKeyConstraint baseTableName="candidate_direction"
+                                 baseColumnNames="candidate_id"
+                                 constraintName="candidate_direction_candidate_id_FK"
+                                 referencedTableName="candidate"
+                                 referencedColumnNames="id" />
+
+        <addForeignKeyConstraint baseTableName="candidate_direction"
+                                 baseColumnNames="direction_id"
+                                 constraintName="candidate_direction_direction_id_FK"
+                                 referencedTableName="direction"
+                                 referencedColumnNames="id" />
+    </changeSet>
+
+</databaseChangeLog>
