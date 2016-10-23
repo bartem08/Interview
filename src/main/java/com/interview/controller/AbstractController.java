@@ -1,9 +1,7 @@
 package com.interview.controller;
 
-import com.interview.model.ITitle;
-import com.interview.model.Response;
-import com.interview.model.entity.Direction;
-import com.interview.model.entity.User;
+import com.interview.model.*;
+import com.interview.model.entity.*;
 import com.interview.model.projection.Title;
 import com.interview.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
