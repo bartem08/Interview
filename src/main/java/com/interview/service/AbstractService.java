@@ -18,4 +18,24 @@ public abstract class AbstractService<E extends AbstractModel> {
         E entity = getRepository().findOne(id);
         return ofNullable(entity);
     }
+
+    @Transactional
+    public Optional<E> create(E entity) {
+        if (entity.getId() != null) {
+            return empty();
+        }
+
+        E saved = getRepository().save(entity);
+        return ofNullable(saved);
+    }
+
+    @Transactional
+    public Optional<E> update(E entity) {
+        if (entity.getId() == null) {
+            return empty();
+        }
+
+        E updated = getRepository().save(entity);
+        return ofNullable(updated);
+    }
 }

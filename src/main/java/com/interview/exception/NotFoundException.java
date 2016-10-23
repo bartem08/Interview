@@ -1,8 +1,13 @@
 package com.interview.exception;
 
-public class NotFoundException extends RuntimeException {
+import lombok.Getter;
+
+public class NotFoundException extends InterviewException {
+
+    @Getter
+    private String message;
 
     public NotFoundException(String message) {
-        super(message);
+        this.message = message;
     }
 }

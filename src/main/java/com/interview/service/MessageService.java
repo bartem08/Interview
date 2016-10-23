@@ -31,4 +31,8 @@ public class MessageService {
         Object[] params = new Object[] { getMessage(label), param };
         return getMessage(code, params);
     }
+
+    public String getMessage(String code, String label) {
+        return getMessage(code, label, null);
+    }
 }
