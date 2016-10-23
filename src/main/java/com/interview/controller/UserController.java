@@ -31,6 +31,7 @@ public class UserController extends AbstractController {
     @RequestMapping(method = POST, consumes = APPLICATION_JSON_VALUE)
     public Response createUser(@RequestBody User user) {
 
+        userService.encodePassword(user);
         Optional<User> created = userService.create(user);
 
         if (!created.isPresent()) {
