@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Data
 @MappedSuperclass
 @EqualsAndHashCode(of = "id")
-public class AbstractModel implements Serializable {
+public class AbstractModel implements IModel<String> {
 
     @Id
     @GeneratedValue(generator = "system-uuid")

@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-public class UserService extends AbstractService<User> {
+public class UserService extends AbstractService<User, String> {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -20,7 +20,7 @@ public class UserService extends AbstractService<User> {
     private UserRepository userRepository;
 
     @Override
-    protected AbstractRepository<User> getRepository() {
+    protected AbstractRepository<User, String> getRepository() {
         return userRepository;
     }
 
