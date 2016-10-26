@@ -20,7 +20,6 @@ public abstract class AbstractService<E extends IModel, I extends Serializable> 
         return ofNullable(entity);
     }
 
-    @Transactional
     public Optional<E> create(E entity) {
         if (entity.getId() != null) {
             return empty();
