@@ -1,8 +1,7 @@
 package com.interview.model.entity;
 
 import com.interview.model.AbstractModel;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
