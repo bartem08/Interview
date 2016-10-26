@@ -1,0 +1,41 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1" author="artem">
+        <createTable tableName="template">
+            <column name="id"
+                    type="VARCHAR(100)">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="name"
+                    type="VARCHAR(100)" />
+            <column name="favourite"
+                    type="TINYINT"
+                    defaultValue="0"/>
+            <column name="online_user_id"
+                    type="VARCHAR(100)" />
+            <column name="direction_id"
+                    type="VARCHAR(100)" />
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="artem">
+        <addUniqueConstraint tableName="template" columnNames="name" />
+        <addForeignKeyConstraint baseTableName="template"
+                                 baseColumnNames="online_user_id"
+                                 constraintName="template_online_user_id_FK"
+                                 referencedTableName="online_user"
+                                 referencedColumnNames="id" />
+        <addForeignKeyConstraint baseTableName="template"
+                                 baseColumnNames="direction_id"
+                                 constraintName="template_direction_id_FK"
+                                 referencedTableName="direction"
+                                 referencedColumnNames="id" />
+    </changeSet>
+
+</databaseChangeLog>

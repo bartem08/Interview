@@ -1,0 +1,35 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1" author="artem">
+        <createTable tableName="template_question">
+            <column name="template_id"
+                    type="VARCHAR(100)" />
+            <column name="question_id"
+                    type="VARCHAR(100)" />
+            <column name="max_grade"
+                    type="DOUBLE" />
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="artem">
+        <addPrimaryKey tableName="template_question"
+                       columnNames="template_id, question_id" />
+        <addForeignKeyConstraint baseTableName="template_question"
+                                 baseColumnNames="template_id"
+                                 constraintName="template_question_template_id_FK"
+                                 referencedTableName="template"
+                                 referencedColumnNames="id" />
+        <addForeignKeyConstraint baseTableName="template_question"
+                                 baseColumnNames="question_id"
+                                 constraintName="template_question_question_id_FK"
+                                 referencedTableName="question"
+                                 referencedColumnNames="id" />
+    </changeSet>
+
+</databaseChangeLog>
