@@ -12,14 +12,12 @@ public abstract class AbstractService<E extends AbstractModel> {
 
     protected abstract AbstractRepository<E> getRepository();
 
-    @Transactional(readOnly = true)
     public Optional<E> get(String id) {
 
         E entity = getRepository().findOne(id);
         return ofNullable(entity);
     }
 
-    @Transactional
     public Optional<E> create(E entity) {
         if (entity.getId() != null) {
             return empty();
