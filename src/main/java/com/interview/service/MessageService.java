@@ -9,8 +9,12 @@ import java.util.Locale;
 @Service
 public class MessageService {
 
-    @Autowired
     private MessageSource messageSource;
+
+    @Autowired
+    public MessageService(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
 
     public String getMessage(String code) {
         return messageSource

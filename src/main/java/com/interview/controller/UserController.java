@@ -3,6 +3,7 @@ package com.interview.controller;
 import com.interview.model.Response;
 import com.interview.model.entity.User;
 import com.interview.model.projection.Title;
+import com.interview.service.MessageService;
 import com.interview.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -18,8 +19,13 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/users")
 public class UserController extends AbstractController {
 
-    @Autowired
     private UserService userService;
+
+    @Autowired
+    protected UserController(MessageService messageService, UserService userService) {
+        super(messageService);
+        this.userService = userService;
+    }
 
     @RequestMapping("/me")
     public Title getCurrentUserInfo() {

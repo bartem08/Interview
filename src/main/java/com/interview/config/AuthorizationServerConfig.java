@@ -21,14 +21,19 @@ import javax.sql.DataSource;
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-    @Autowired
     private DataSource dataSource;
 
-    @Autowired
     private UserDetailsService userDetailsService;
 
-    @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    public AuthorizationServerConfig(DataSource dataSource, UserDetailsService userDetailsService,
+                                     AuthenticationManager authenticationManager) {
+        this.dataSource = dataSource;
+        this.userDetailsService = userDetailsService;
+        this.authenticationManager = authenticationManager;
+    }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
