@@ -12,8 +12,12 @@ import java.util.stream.Collectors;
 
 public abstract class AbstractController {
 
-    @Autowired
     protected MessageService messageService;
+
+    @Autowired
+    protected AbstractController(MessageService messageService) {
+        this.messageService = messageService;
+    }
 
     protected User getCurrentUser() {
 

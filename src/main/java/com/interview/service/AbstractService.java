@@ -13,7 +13,6 @@ public abstract class AbstractService<E extends IModel, I extends Serializable> 
 
     protected abstract AbstractRepository<E, I> getRepository();
 
-    @Transactional(readOnly = true)
     public Optional<E> get(I id) {
 
         E entity = getRepository().findOne(id);

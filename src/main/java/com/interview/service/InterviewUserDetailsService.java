@@ -9,8 +9,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class InterviewUserDetailsService implements UserDetailsService {
 
-    @Autowired
     private UserService userService;
+
+    @Autowired
+    public InterviewUserDetailsService(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) {
