@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CandidateService extends AbstractService<Candidate> {
+public class CandidateService extends AbstractService<Candidate, String> {
 
     private CandidateRepository candidateRepository;
 
@@ -17,7 +17,7 @@ public class CandidateService extends AbstractService<Candidate> {
     }
 
     @Override
-    protected AbstractRepository<Candidate> getRepository() {
+    protected AbstractRepository<Candidate, String> getRepository() {
         return candidateRepository;
     }
 }

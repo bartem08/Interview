@@ -4,4 +4,4 @@ import com.interview.model.entity.Candidate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CandidateRepository extends AbstractRepository<Candidate> {}
+public interface CandidateRepository extends AbstractRepository<Candidate, String> {}

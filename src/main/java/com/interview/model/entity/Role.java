@@ -13,8 +13,6 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = false, of = "authority")
 public class Role extends AbstractModel implements GrantedAuthority {
 
-    private static final long serialVersionUID = 410L;
-
     @Column(name = "authority")
     private String authority;
 }
