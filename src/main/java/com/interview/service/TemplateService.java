@@ -9,8 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class TemplateService extends AbstractService<Template, String> {
 
-    @Autowired
     private TemplateRepository templateRepository;
+
+    @Autowired
+    public TemplateService(TemplateRepository templateRepository) {
+        this.templateRepository = templateRepository;
+    }
 
     @Override
     protected AbstractRepository<Template, String> getRepository() {

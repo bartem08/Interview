@@ -9,8 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class QuestionService extends AbstractService<Question, String> {
 
-    @Autowired
     private QuestionRepository questionRepository;
+
+    @Autowired
+    public QuestionService(QuestionRepository questionRepository) {
+        this.questionRepository = questionRepository;
+    }
 
     @Override
     protected AbstractRepository<Question, String> getRepository() {
