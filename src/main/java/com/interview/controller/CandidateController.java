@@ -17,7 +17,7 @@ public class CandidateController extends AbstractController {
     private CandidateService candidateService;
 
     @Autowired
-    public CandidateController(MessageService messageService, CandidateService candidateService) {
+    protected CandidateController(MessageService messageService, CandidateService candidateService) {
         super(messageService);
         this.candidateService = candidateService;
     }

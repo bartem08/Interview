@@ -17,8 +17,6 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = false, of = "phone")
 public class User extends AbstractModel implements InterviewUserDetails, ITitle {
 
-    private static final long serialVersionUID = 7672079542738527281L;
-
     @Column(name = "first_name")
     private String firstName;
 
