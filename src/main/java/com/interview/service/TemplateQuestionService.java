@@ -10,8 +10,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class TemplateQuestionService extends AbstractService<TemplateQuestion, TQuestionId> {
 
+    private final TemplateQuestionRepository templateQuestionRepository;
+
     @Autowired
-    private TemplateQuestionRepository templateQuestionRepository;
+    public TemplateQuestionService(TemplateQuestionRepository templateQuestionRepository) {
+        this.templateQuestionRepository = templateQuestionRepository;
+    }
 
     @Override
     protected AbstractRepository<TemplateQuestion, TQuestionId> getRepository() {
