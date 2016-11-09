@@ -4,6 +4,7 @@ import com.interview.exception.NotFoundException;
 import com.interview.model.entity.Candidate;
 import com.interview.model.projection.CandidateInfo;
 import com.interview.service.CandidateService;
+import com.interview.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +14,13 @@ import static org.springframework.http.MediaType.*;
 @RequestMapping("/candidates")
 public class CandidateController extends AbstractController {
 
-    @Autowired
     private CandidateService candidateService;
+
+    @Autowired
+    public CandidateController(MessageService messageService, CandidateService candidateService) {
+        super(messageService);
+        this.candidateService = candidateService;
+    }
 
     @RequestMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
     public CandidateInfo getCandidate(@PathVariable("id") String id) {

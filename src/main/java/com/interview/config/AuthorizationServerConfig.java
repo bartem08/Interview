@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -21,20 +20,29 @@ import javax.sql.DataSource;
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-    @Autowired
     private DataSource dataSource;
 
-    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     private UserDetailsService userDetailsService;
 
-    @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    public AuthorizationServerConfig(DataSource dataSource, PasswordEncoder passwordEncoder,
+                                     UserDetailsService userDetailsService,
+                                     AuthenticationManager authenticationManager) {
+        this.dataSource = dataSource;
+        this.passwordEncoder = passwordEncoder;
+        this.userDetailsService = userDetailsService;
+        this.authenticationManager = authenticationManager;
+    }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients
                 .jdbc(dataSource)
-                .passwordEncoder(passwordEncoder());
+                .passwordEncoder(passwordEncoder);
     }
 
     @Override
@@ -55,10 +63,4 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public TokenStore tokenStore() {
         return new JdbcTokenStore(dataSource);
     }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
 }
