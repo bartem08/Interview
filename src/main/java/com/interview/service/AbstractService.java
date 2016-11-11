@@ -2,7 +2,6 @@ package com.interview.service;
 
 import com.interview.model.IModel;
 import com.interview.repository.AbstractRepository;
-import org.springframework.transaction.annotation.Transactional;
 
 import static java.util.Optional.*;
 
@@ -23,6 +22,26 @@ public abstract class AbstractService<E extends IModel, I extends Serializable> 
         if (entity.getId() != null) {
             return empty();
         }
+        return save(entity);
+    }
+
+    public Optional<E> update(E entity) {
+        if (entity.getId() == null) {
+            return empty();
+        }
+        return save(entity);
+    }
+
+    public boolean deleteById(I id) {
+        if (!getRepository().exists(id)) {
+            return false;
+        }
+
+        getRepository().delete(id);
+        return true;
+    }
+
+    private Optional<E> save(E entity) {
 
         E saved = getRepository().save(entity);
         return ofNullable(saved);
