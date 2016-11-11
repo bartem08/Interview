@@ -13,12 +13,12 @@ import java.util.Optional;
 @Service
 public class UserService extends AbstractService<User, String> {
 
-    private final PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository) {
+    protected UserService(PasswordEncoder passwordEncoder, UserRepository userRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
     }

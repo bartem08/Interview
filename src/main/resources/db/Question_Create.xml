@@ -14,16 +14,16 @@
             </column>
             <column name="content"
                     type="VARCHAR(255)" />
-            <column name="topic_id"
+            <column name="tag_id"
                     type="VARCHAR(100)" />
         </createTable>
     </changeSet>
 
     <changeSet id="2" author="artem">
         <addForeignKeyConstraint baseTableName="question"
-                                 baseColumnNames="topic_id"
-                                 constraintName="question_topic_id_FK"
-                                 referencedTableName="topic"
+                                 baseColumnNames="tag_id"
+                                 constraintName="question_question_tag_id_FK"
+                                 referencedTableName="question_tag"
                                  referencedColumnNames="id" />
     </changeSet>
 
