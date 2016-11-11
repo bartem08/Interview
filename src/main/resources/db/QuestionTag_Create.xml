@@ -7,7 +7,7 @@
     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <changeSet id="1" author="artem">
-        <createTable tableName="topic">
+        <createTable tableName="question_tag">
             <column name="id"
                     type="VARCHAR(100)">
                 <constraints primaryKey="true" />
@@ -18,7 +18,7 @@
     </changeSet>
 
     <changeSet id="2" author="artem">
-        <addUniqueConstraint tableName="topic" columnNames="name" />
+        <addUniqueConstraint tableName="question_tag" columnNames="name" />
     </changeSet>
 
 </databaseChangeLog>

@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 @Data
 @EqualsAndHashCode
+@NoArgsConstructor
 @AllArgsConstructor(staticName = "of")
 public class TQuestionId implements Serializable {
 
