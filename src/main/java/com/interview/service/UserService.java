@@ -18,7 +18,9 @@ public class UserService extends AbstractService<User, String> {
     private UserRepository userRepository;
 
     @Autowired
-    protected UserService(PasswordEncoder passwordEncoder, UserRepository userRepository) {
+    protected UserService(MessageService messageService, PasswordEncoder passwordEncoder,
+                          UserRepository userRepository) {
+        super(messageService);
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
     }
