@@ -1,5 +1,6 @@
 package com.interview.service;
 
+import com.interview.exception.NotFoundException;
 import com.interview.model.IModel;
 import com.interview.repository.AbstractRepository;
 
@@ -10,12 +11,24 @@ import java.util.Optional;
 
 public abstract class AbstractService<E extends IModel, I extends Serializable> {
 
+    protected MessageService messageService;
+
+    public AbstractService(MessageService messageService) {
+        this.messageService = messageService;
+    }
+
     protected abstract AbstractRepository<E, I> getRepository();
 
     public Optional<E> get(I id) {
 
         E entity = getRepository().findOne(id);
         return ofNullable(entity);
+    }
+
+    public E getNotNull(I id, String label) {
+
+        return get(id).orElseThrow(() ->
+                new NotFoundException(messageService.getMessage("not.found", label, id)));
     }
 
     public Optional<E> create(E entity) {

@@ -12,7 +12,8 @@ public class TemplateService extends AbstractService<Template, String> {
     private TemplateRepository templateRepository;
 
     @Autowired
-    public TemplateService(TemplateRepository templateRepository) {
+    public TemplateService(MessageService messageService, TemplateRepository templateRepository) {
+        super(messageService);
         this.templateRepository = templateRepository;
     }
 

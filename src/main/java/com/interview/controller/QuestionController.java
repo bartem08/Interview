@@ -30,7 +30,7 @@ public class QuestionController extends AbstractController {
         return QuestionInfo.builder()
                 .id(id)
                 .question(question.getContent())
-                .topic(question.getTopic().toString())
+                .topic(question.getQuestionTag().toString())
                 .build();
     }
 }
