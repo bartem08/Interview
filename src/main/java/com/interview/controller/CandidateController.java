@@ -1,6 +1,5 @@
 package com.interview.controller;
 
-import com.interview.exception.NotFoundException;
 import com.interview.model.Response;
 import com.interview.model.entity.Candidate;
 import com.interview.model.projection.CandidateInfo;
@@ -29,9 +28,7 @@ public class CandidateController extends AbstractController {
     @RequestMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
     public CandidateInfo getCandidate(@PathVariable("id") String id) {
 
-        Candidate candidate = candidateService.get(id)
-                .orElseThrow(() -> new NotFoundException(
-                        messageService.getMessage("not.found", "candidate.label", id)));
+        Candidate candidate = candidateService.getNotNull(id, "candidate.label");
 
         return CandidateInfo.builder()
                 .title(buildTitle(candidate))
