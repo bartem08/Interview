@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.MediaType.*;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
-import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequestMapping("/candidates")
@@ -43,9 +42,9 @@ public class CandidateController extends AbstractController {
     public Response createCandidate(@RequestBody Candidate candidate) {
 
         if (!candidateService.create(candidate).isPresent()) {
-            return buildResponse(CONFLICT, messageService.getMessage("not.create", "candidate.label"));
+            return Response.valueOf(messageService.getMessage("not.create", "candidate.label"));
         }
-        return buildResponse(CREATED, messageService.getMessage("success.create", "candidate.label"));
+        return Response.valueOf(messageService.getMessage("success.create", "candidate.label"));
     }
 
     @Secured("ROLE_HR")
@@ -53,9 +52,9 @@ public class CandidateController extends AbstractController {
     public Response updateCandidate(@RequestBody Candidate candidate) {
 
         if (!candidateService.update(candidate).isPresent()) {
-            return buildResponse(CONFLICT, messageService.getMessage("not.update", "candidate.label"));
+            return Response.valueOf(messageService.getMessage("not.update", "candidate.label"));
         }
-        return buildResponse(OK, messageService.getMessage("success.update", "candidate.label"));
+        return Response.valueOf(messageService.getMessage("success.update", "candidate.label"));
     }
 
     @Secured("ROLE_HR")
@@ -63,8 +62,8 @@ public class CandidateController extends AbstractController {
     public Response deleteCandidate(@PathVariable("id") String id) {
 
         if (!candidateService.deleteById(id)) {
-            return buildResponse(CONFLICT, messageService.getMessage("not.delete", "candidate.label"));
+            return Response.valueOf(messageService.getMessage("not.delete", "candidate.label"));
         }
-        return buildResponse(OK, messageService.getMessage("success.delete", "candidate.label"));
+        return Response.valueOf(messageService.getMessage("success.delete", "candidate.label"));
     }
 }
