@@ -24,10 +24,6 @@ public class CandidateSearchRepository extends CriteriaBase<Candidate> {
 
     public List<Candidate> findCandidatesBySearchWord(String searchWord, Integer offset) {
 
-        if (searchWord == null || searchWord.isEmpty() || offset < 0) {
-            return Collections.emptyList();
-        }
-
         return entityManagerFactory.createEntityManager()
                 .createQuery(byPhoneCriteriaQuery(searchWord))
                 .setFirstResult(offset)
