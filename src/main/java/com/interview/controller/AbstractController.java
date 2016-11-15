@@ -5,7 +5,6 @@ import com.interview.model.entity.*;
 import com.interview.model.projection.Title;
 import com.interview.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.stream.Collectors;
@@ -38,13 +37,4 @@ public abstract class AbstractController {
                         .collect(Collectors.toSet()))
                 .build();
     }
-
-    protected Response buildResponse(HttpStatus status, String message) {
-
-        return Response.builder()
-                .status(status)
-                .message(message)
-                .build();
-    }
-
 }

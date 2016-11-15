@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
-import static org.springframework.http.HttpStatus.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -41,10 +40,8 @@ public class UserController extends AbstractController {
         Optional<User> created = userService.create(user);
 
         if (!created.isPresent()) {
-            return buildResponse(CONFLICT,
-                    messageService.getMessage("not.create", "user.label"));
+            return Response.valueOf(messageService.getMessage("not.create", "user.label"));
         }
-        return buildResponse(CREATED,
-                messageService.getMessage("success.create", "user.label"));
+        return Response.valueOf(messageService.getMessage("success.create", "user.label"));
     }
 }

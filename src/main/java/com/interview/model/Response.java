@@ -1,14 +1,11 @@
 package com.interview.model;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.http.HttpStatus;
 
 @Data
-@Builder
+@AllArgsConstructor(staticName = "valueOf")
 public class Response {
-
-    private HttpStatus status;
 
     private String message;
 }
