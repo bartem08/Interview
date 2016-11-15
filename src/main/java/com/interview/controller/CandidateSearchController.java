@@ -1,7 +1,6 @@
 package com.interview.controller;
 
 import com.interview.model.projection.Title;
-import com.interview.repository.CandidateSearchRepository;
 import com.interview.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,19 +14,18 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/search/candidate")
 public class CandidateSearchController extends AbstractController {
 
-    private CandidateSearchRepository candidateSearchRepository;
+    private CandidateService candidateService;
 
     @Autowired
-    public CandidateSearchController(MessageService messageService,
-                                     CandidateSearchRepository candidateSearchRepository) {
+    public CandidateSearchController(MessageService messageService, CandidateService candidateService) {
         super(messageService);
-        this.candidateSearchRepository = candidateSearchRepository;
+        this.candidateService = candidateService;
     }
 
     @RequestMapping(produces = APPLICATION_JSON_VALUE)
     public List<Title> findByNameOrPhoneNumber(String term, Integer offset) {
 
-        return candidateSearchRepository.findCandidatesBySearchWord(term, offset)
+        return candidateService.findCandidatesByNameOrPhoneNumber(term, offset)
                 .stream()
                 .map(this::buildTitle)
                 .collect(Collectors.toList());
