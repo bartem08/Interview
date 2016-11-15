@@ -13,7 +13,9 @@ public class TemplateQuestionService extends AbstractService<TemplateQuestion, T
     private final TemplateQuestionRepository templateQuestionRepository;
 
     @Autowired
-    public TemplateQuestionService(TemplateQuestionRepository templateQuestionRepository) {
+    public TemplateQuestionService(MessageService messageService,
+                                   TemplateQuestionRepository templateQuestionRepository) {
+        super(messageService);
         this.templateQuestionRepository = templateQuestionRepository;
     }
 

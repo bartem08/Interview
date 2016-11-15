@@ -8,12 +8,12 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Data @Entity
-@Table(name = "topic")
-@EqualsAndHashCode(callSuper = false, of = "topic")
-public class Topic extends AbstractModel {
+@Table(name = "question_tag")
+@EqualsAndHashCode(callSuper = false, of = "name")
+public class QuestionTag extends AbstractModel {
 
-    private String topic;
+    private String name;
 
-    @OneToMany(mappedBy = "topic")
+    @OneToMany(mappedBy = "questionTag")
     private Set<Question> questions;
 }

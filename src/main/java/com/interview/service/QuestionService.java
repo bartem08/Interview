@@ -12,7 +12,8 @@ public class QuestionService extends AbstractService<Question, String> {
     private QuestionRepository questionRepository;
 
     @Autowired
-    public QuestionService(QuestionRepository questionRepository) {
+    public QuestionService(MessageService messageService, QuestionRepository questionRepository) {
+        super(messageService);
         this.questionRepository = questionRepository;
     }
 
