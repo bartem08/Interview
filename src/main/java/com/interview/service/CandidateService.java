@@ -1,10 +1,16 @@
 package com.interview.service;
 
 import com.interview.model.entity.Candidate;
+import com.interview.model.entity.Direction;
 import com.interview.repository.AbstractRepository;
 import com.interview.repository.CandidateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class CandidateService extends AbstractService<Candidate, String> {
@@ -12,7 +18,8 @@ public class CandidateService extends AbstractService<Candidate, String> {
     private CandidateRepository candidateRepository;
 
     @Autowired
-    public CandidateService(CandidateRepository candidateRepository) {
+    public CandidateService(MessageService messageService, CandidateRepository candidateRepository) {
+        super(messageService);
         this.candidateRepository = candidateRepository;
     }
 

@@ -14,8 +14,8 @@ public class Question extends AbstractModel {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "topic_id")
-    private Topic topic;
+    @JoinColumn(name = "tag_id")
+    private QuestionTag questionTag;
 
     @OneToMany(mappedBy = "question")
     private Set<TemplateQuestion> templates;
