@@ -27,10 +27,4 @@ public class CandidateService extends AbstractService<Candidate, String> {
     protected AbstractRepository<Candidate, String> getRepository() {
         return candidateRepository;
     }
-
-    public Page<Candidate> findByDirections(Pageable pageable, Direction ... directions) {
-
-        List<Direction> directionList = Arrays.asList(directions);
-        return candidateRepository.findAllByDirectionsIn(directionList, pageable);
-    }
 }

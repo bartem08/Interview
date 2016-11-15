@@ -6,47 +6,48 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 import javax.persistence.criteria.*;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Stream;
 
 @Repository
-public class CandidateSearchRepository {
+public class CandidateSearchRepository extends CriteriaBase<Candidate> {
 
-    public static final int MAX_RESULTS = 5;
+    private static final int MAX_RESULTS = 5;
 
-    private EntityManagerFactory entityManagerFactory;
-
-    private CriteriaBuilder criteriaBuilder;
-
-    private CriteriaQuery<Candidate> query;
-
-    private Root<Candidate> candidate;
+    private static final String PHONE_NUMBER = "^[0][1-9][0-9]";
 
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public CandidateSearchRepository(EntityManagerFactory entityManagerFactory) {
-        this.entityManagerFactory = entityManagerFactory;
-        criteriaBuilder = entityManagerFactory.getCriteriaBuilder();
-        query = criteriaBuilder.createQuery(Candidate.class);
-        candidate = query.from(Candidate.class);
+        super(entityManagerFactory, Candidate.class);
     }
 
-    public List<Candidate> findCandidates(String searchWord, Integer offset) {
+    public List<Candidate> findCandidatesBySearchWord(String searchWord, Integer offset) {
 
-        if (offset < 0 || searchWord.isEmpty()) {
+        if (searchWord == null || searchWord.isEmpty() || offset < 0) {
             return Collections.emptyList();
         }
 
         return entityManagerFactory.createEntityManager()
-                .createQuery(createCriteriaQuery(searchWord.split(" ")))
+                .createQuery(byPhoneCriteriaQuery(searchWord))
                 .setFirstResult(offset)
                 .setMaxResults(MAX_RESULTS)
                 .getResultList();
     }
 
-    CriteriaQuery<Candidate> createCriteriaQuery(String ... searchWords) {
+    private CriteriaQuery<Candidate> byPhoneCriteriaQuery(String searchWord) {
+
+        if (!searchWord.matches(PHONE_NUMBER)) {
+            return byNameCriteriaQuery(searchWord.split(" "));
+        }
+
+        Predicate phoneNumberLikeSearchWord =
+                criteriaBuilder.like(eRoot.get("phone"), searchWord + "%");
+
+        return query.where(phoneNumberLikeSearchWord);
+    }
+
+    private CriteriaQuery<Candidate> byNameCriteriaQuery(String ... searchWords) {
 
         Predicate[] nameLikeSearchWords = Arrays.stream(searchWords)
                 .map(this::nameStartsWith)
@@ -60,7 +61,7 @@ public class CandidateSearchRepository {
     private Predicate nameStartsWith(String searchWord) {
 
         Predicate[] nameLikeSearchWord = Stream.of("firstName", "lastName")
-                .map(property -> criteriaBuilder.like(candidate.get(property), searchWord + "%"))
+                .map(property -> criteriaBuilder.like(eRoot.get(property), searchWord + "%"))
                 .toArray(Predicate[]::new);
 
         return criteriaBuilder.or(nameLikeSearchWord);
